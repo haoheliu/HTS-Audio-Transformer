@@ -3,10 +3,10 @@
 # HTS-AT: A HIERARCHICAL TOKEN-SEMANTIC AUDIO TRANSFORMER FOR SOUND CLASSIFICATION AND DETECTION
 # The configuration for training the model
 
-exp_name = "exp_htsat_pretrain" # the saved ckpt prefix name of the model 
-workspace = "/home/kechen/Research/HTSAT" # the folder of your code
-dataset_path = "/home/Research/audioset" # the dataset path
-desed_folder = "/home/Research/DESED" # the desed file
+exp_name = "eval" # the saved ckpt prefix name of the model 
+workspace = "/vol/research/dcase2022/project/HTS-Audio-Transformer/workspace" # the folder of your code
+dataset_path = "/vol/research/NOBACKUP/CVSSP/scratch_4weeks/hl01486/projects/audioset_tagging_cnn/workspaces/audioset_tagging/hdf5s/waveforms" # the dataset path
+desed_folder = "." # the desed file
 
 dataset_type = "audioset" # "audioset" "esc-50" "scv2"
 index_type = "full_train" # only works for audioset
@@ -16,7 +16,7 @@ loss_type = "clip_bce" #
 # AudioSet & SCV2: "clip_bce" |  ESC-50: "clip_ce" 
 
 # trained from a checkpoint, or evaluate a single model 
-resume_checkpoint = None 
+resume_checkpoint = "/vol/research/dcase2022/project/HTS-Audio-Transformer/checkpoint/HTSAT_AudioSet_Saved_6.ckpt" 
 # "/home/Research/model_backup/AudioSet/HTSAT_AudioSet_Saved_1.ckpt"
  
 esc_fold = 0 # just for esc dataset, select the fold you need for evaluation and (+1) validation

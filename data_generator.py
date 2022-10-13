@@ -147,12 +147,12 @@ class SEDDataset(Dataset):
             }
         else:
             audio_name = self.fp["audio_name"][s_index].decode()
-            hdf5_path = self.fp["hdf5_path"][s_index].decode()
+            # hdf5_path = self.fp["hdf5_path"][s_index].decode()
             # replace("/home/tiger/DB/knut/data/audioset", self.config.dataset_path)
-            r_idx = self.fp["index_in_hdf5"][s_index]
+            # r_idx = self.fp["index_in_hdf5"][s_index]
             target = self.fp["target"][s_index].astype(np.float32)
-            with h5py.File(hdf5_path, "r") as f:
-                waveform = int16_to_float32(f["waveform"][r_idx])
+            # with h5py.File(hdf5_path, "r") as f:
+            waveform = int16_to_float32(self.fp["waveform"][s_index])
             # Time shift
             if (self.config.enable_time_shift) and (not self.eval_mode):
                 waveform = self.time_shifting(waveform)
@@ -170,8 +170,8 @@ class SEDDataset(Dataset):
                         target[add_key] = 1.0
       
             data_dict = {
-                "hdf5_path": hdf5_path,
-                "index_in_hdf5": r_idx,
+                "hdf5_path": "",
+                "index_in_hdf5": "",
                 "audio_name": audio_name,
                 "waveform": waveform,
                 "target": target

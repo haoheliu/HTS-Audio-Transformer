@@ -79,7 +79,7 @@ class data_prep(pl.LightningDataModule):
 
 def save_idc():
     train_index_path = os.path.join(config.dataset_path, "hdf5s", "indexes", config.index_type + ".h5")
-    eval_index_path = os.path.join(config.dataset_path,"hdf5s", "indexes", "eval.h5")
+    eval_index_path = os.path.join(config.dataset_path, "eval.h5")
     process_idc(train_index_path, config.classes_num,  config.index_type + "_idc.npy")
     process_idc(eval_index_path, config.classes_num, "eval_idc.npy")
 
@@ -113,7 +113,7 @@ def esm_test():
         )
     else:
         # dataset file pathes
-        eval_index_path = os.path.join(config.dataset_path,"hdf5s", "indexes", "eval.h5")
+        eval_index_path = os.path.join(config.dataset_path, "eval.h5")
         eval_idc = np.load("eval_idc.npy", allow_pickle = True)
 
         # import dataset SEDDataset
@@ -183,7 +183,7 @@ def test():
         )
     else:
         if config.dataset_type == "audioset":
-            eval_index_path = os.path.join(config.dataset_path,"hdf5s", "indexes", "eval.h5")
+            eval_index_path = os.path.join(config.dataset_path, "eval.h5")
             eval_idc = np.load("eval_idc.npy", allow_pickle = True)
             eval_dataset = SEDDataset(
                 index_path=eval_index_path,
@@ -217,7 +217,7 @@ def test():
         checkpoint_callback = False,
         accelerator = "ddp" if device_num > 1 else None,
         num_sanity_val_steps = 0,
-        # resume_from_checkpoint = config.resume_checkpoint,
+        resume_from_checkpoint = config.resume_checkpoint,
         replace_sampler_ddp = False,
         gradient_clip_val=1.0
     )
